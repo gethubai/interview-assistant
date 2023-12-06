@@ -10,7 +10,12 @@ export class RecorderController {
   isRecording: boolean = false;
 
   constructor(stream: MediaStream, options: CustomRecorderOptions) {
-    this.recorder = new MediaRecorder(stream, {});
+    const recordingStream = new MediaStream();
+    for (const track of stream.getAudioTracks()) {
+      recordingStream.addTrack(track);
+    }
+
+    this.recorder = new MediaRecorder(recordingStream, {});
     this.recorder.addEventListener('dataavailable', this.ondataavailable);
 
     this.options = options;
