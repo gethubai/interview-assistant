@@ -64,7 +64,7 @@ export class AudioSourceController {
   }
 
   getMediaStreamConstraints(): MediaStreamConstraints {
-    if (isWindows()) {
+    if (isWindows() && this.deviceKind === "audiooutput") { // computer audio
       return {
         audio: {
           mandatory: {
