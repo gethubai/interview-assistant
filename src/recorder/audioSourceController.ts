@@ -1,5 +1,6 @@
 import { event } from '@hubai/core';
 import { RecorderController } from './recorderController';
+import { isWindows } from '../utils/envUtils';
 
 export type RecordingStartedEvent = {
   deviceId: string;
@@ -50,13 +51,9 @@ export class AudioSourceController {
     } as RecordingStartedEvent);
 
     if (!this.customRecorder) {
-      this.stream = await navigator.mediaDevices.getUserMedia({
-        audio: {
-          deviceId: {
-            exact: this.deviceId,
-          },
-        },
-      });
+      this.stream = await navigator.mediaDevices.getUserMedia(
+        this.getMediaStreamConstraints()
+      );
 
       this.customRecorder = new RecorderController(this.stream, {
         previousSecondsToRecord: 0,
@@ -64,6 +61,31 @@ export class AudioSourceController {
     }
 
     this.customRecorder.start();
+  }
+
+  getMediaStreamConstraints(): MediaStreamConstraints {
+    if (isWindows()) {
+      return {
+        audio: {
+          mandatory: {
+            chromeMediaSource: 'desktop',
+          },
+        },
+        video: {
+          mandatory: {
+            chromeMediaSource: 'desktop',
+          },
+        },
+      };
+    }
+
+    return {
+      audio: {
+        deviceId: {
+          exact: this.deviceId,
+        },
+      },
+    };
   }
 
   async stopRecording(): Promise<Blob | undefined> {
