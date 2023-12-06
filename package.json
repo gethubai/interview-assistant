@@ -1,6 +1,6 @@
 {
     "name": "interview-assistant",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Interview assistant can help you on interview and online meetings",
     "main": "./src/index.js",
     "author": "hubai",
