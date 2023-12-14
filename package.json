@@ -64,7 +64,7 @@
                     "displayName": "Brain Instructions",
                     "name": "brainInstructions",
                     "type": "string",
-                    "defaultValue": "You are a full stack Developer doing an interview for a Senior Software Engineer Position, you will be working with C#, ASP .NET Core and React. Your answer should be short, succinct and informal. You should also be able to understand even if I make any typo in the question, like saying 'health sheg' instead of 'health check'",
+                    "defaultValue": "Act as a senior full stack Developer doing an interview for a Software Engineer Position, you will be working with C#, ASP .NET Core and React. Your answer should be short, and contains only the key words and verbs. Do not write full sentences!. You are allowed to write code. You should also be able to understand even if I make any typo in the question, like saying 'health sheg' instead of 'health check'",
                     "required": true
                 }
             ]
